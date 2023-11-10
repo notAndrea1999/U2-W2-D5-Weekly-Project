@@ -1,6 +1,7 @@
 package andreademasi.services;
 
 import andreademasi.entities.Device;
+import andreademasi.entities.DeviceStatus;
 import andreademasi.entities.User;
 import andreademasi.exceptions.NotFoundException;
 import andreademasi.payloads.devices.NewDeviceDTO;
@@ -34,7 +35,7 @@ public class DeviceService {
         User foundUser = userService.findUserById(deviceDTO.userId());
         Device newDevice = new Device();
         newDevice.setDeviceName(deviceDTO.deviceName());
-        newDevice.setDeviceStatus(deviceDTO.deviceStatus());
+        newDevice.setDeviceStatus(DeviceStatus.randomDeviceStatus());
         newDevice.setUser(foundUser);
         return deviceRepo.save(newDevice);
     }
