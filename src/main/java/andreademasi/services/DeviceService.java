@@ -35,10 +35,20 @@ public class DeviceService {
         User foundUser = userService.findUserById(deviceDTO.userId());
         Device newDevice = new Device();
         newDevice.setDeviceName(deviceDTO.deviceName());
-        newDevice.setDeviceStatus(DeviceStatus.randomDeviceStatus());
+        newDevice.setDeviceStatus(deviceDTO.deviceStatus());
         newDevice.setUser(foundUser);
-        return deviceRepo.save(newDevice);
+        if (newDevice.getDeviceStatus() == DeviceStatus.DISPONIBILE) {
+            //newDevice.setDeviceStatus(DeviceStatus.ASSEGANTO);
+            return deviceRepo.save(newDevice);
+        } else if (newDevice.getDeviceStatus() == DeviceStatus.ASSEGANTO) {
+            return deviceRepo.save(newDevice);
+        } else {
+            newDevice.setUser(null);
+            return deviceRepo.save(newDevice);
+        }
+
     }
+
 
     public Device findDeviceByIdAndUpdate(long id, NewDeviceDTO deviceDTO) {
         User foundUser = userService.findUserById(deviceDTO.userId());

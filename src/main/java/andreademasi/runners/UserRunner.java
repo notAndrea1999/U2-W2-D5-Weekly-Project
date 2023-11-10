@@ -24,7 +24,7 @@ public class UserRunner implements CommandLineRunner {
                 faker.name().lastName(),
                 faker.internet().emailAddress()
         );
-//        for (int i = 0; i < 20; i++) {
+//        for (int i = 0; i < 30; i++) {
 //            userService.saveUser(userSupplier.get());
 //        }
 
